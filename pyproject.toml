@@ -1,0 +1,31 @@
+[project]
+name = "wravtex"
+version = "0.1.0"
+description = "Git の版と DVC の図版を指定し、LaTeX の標準ツールを TeX Live のコンテナで実行するラッパー"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+# 論文リポジトリの解析用パッケージと同じ環境へ入れても衝突しないよう、実行時の依存は標準ライブラリだけとする
+dependencies = []
+
+[project.scripts]
+wravtex = "wravtex.cli:main"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+    "pyright>=1.1.400",
+    "pytest>=8.0",
+    "ruff>=0.16.5",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.pyright]
+typeCheckingMode = "strict"
