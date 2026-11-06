@@ -1,0 +1,11 @@
+\documentclass{wravtexsample}
+\usepackage{luatexja}
+\usepackage{graphicx}
+\graphicspath{{../common/}}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{../common/refs.bib}
+\begin{document}
+\wravtexmarker. 日本語の本文 \cite{knuth1984}.
+\includegraphics[width=1cm]{figure.png}
+\printbibliography
+\end{document}
