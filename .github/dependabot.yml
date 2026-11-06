@@ -1,0 +1,21 @@
+# Dependabot 設定
+
+version: 2
+updates:
+    # GitHub Actions は全リポジトリ共通で有効化する
+    - package-ecosystem: 'github-actions'
+      directory: '/'
+      schedule:
+          interval: 'weekly'
+      groups:
+          # update-types を指定せず major も含めて 1 PR へ集約する
+          actions:
+              patterns: ['*']
+
+    - package-ecosystem: 'uv'
+      directory: '/'
+      schedule:
+          interval: 'weekly'
+      groups:
+          uv:
+              patterns: ['*']

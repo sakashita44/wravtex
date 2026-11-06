@@ -1,0 +1,50 @@
+{
+    // 除外対象は .gitignore から取る (markdownlint-cli2 は .markdownlintignore を読まない)
+    "gitignore": true,
+    // CLAUDE.md は AGENTS.md を取り込む import の 1 行だけを記述するため、見出しを持たない
+    "ignores": ["CLAUDE.md"],
+    "config": {
+        "MD003": {
+            "style": "atx",
+        },
+        // Prettier の出力に合わせる
+        "MD004": {
+            "style": "dash",
+        },
+        "MD007": {
+            "indent": 4,
+        },
+        // 行末 2 スペースによる改行を許さない。.editorconfig と pre-commit の trailing-whitespace も同じ方針とする
+        "MD009": {
+            "br_spaces": 0,
+        },
+        // 日本語の文書は行長で折り返さない
+        "MD013": false,
+        // Keep a Changelog 形式の CHANGELOG は、版ごとに同じ見出しが並ぶ
+        "MD024": {
+            "siblings_only": true,
+        },
+        // Prettier の出力に合わせる
+        "MD029": {
+            "style": "one",
+        },
+        // 技術文書では HTML を要する場合がある
+        "MD033": false,
+        "MD035": {
+            "style": "---",
+        },
+        "MD046": {
+            "style": "fenced",
+        },
+        "MD048": {
+            "style": "backtick",
+        },
+        // Prettier の出力に合わせる
+        "MD049": {
+            "style": "underscore",
+        },
+        "MD050": {
+            "style": "asterisk",
+        },
+    },
+}
