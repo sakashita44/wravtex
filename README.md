@@ -1,6 +1,10 @@
 # wravtex
 
-wravtex は、Git の版と DVC で管理する図版を指定して、LaTeX の原稿の組版、版の間の差分 PDF の生成、Word 形式への変換を行う CLI である。LaTeX の標準ツール（latexmk、latexdiff、latexpand）は TeX Live のコンテナで実行される。pandoc は pandoc のコンテナで実行される。利用者は、組版に用いるイメージを論文リポジトリの `wravtex.toml` にダイジェストで記録する。これにより、同じ版と同じ設定から同じ環境で組版できる。TeX Live、フォントキャッシュ、TeX のユーザー設定はホストには配置されず、コンテナと wravtex が管理する Docker ボリュームに格納される。
+wravtex は、Git の版と DVC で管理する図版を指定して、LaTeX の原稿の組版、版の間の差分 PDF の生成、Word 形式への変換を行う CLI である。
+
+各処理は Docker のコンテナで実行される。LaTeX の標準ツール（latexmk、latexdiff、latexpand）は TeX Live のコンテナで、pandoc は pandoc のコンテナで実行される。利用者は、用いるイメージを論文リポジトリの `wravtex.toml` にダイジェストで記録する。これにより、同じ版と同じ設定から同じ環境で組版できる。
+
+TeX Live、フォントキャッシュ、TeX のユーザー設定はホストには配置されず、コンテナと wravtex が管理する Docker ボリュームに格納される。
 
 組版の手順（エンジン、文献処理、実行回数）は原稿ディレクトリの `.latexmkrc` に従う。wravtex を用いなくても、原稿は TeX Live と latexmk で組版できる。
 
@@ -73,9 +77,9 @@ pdfLaTeX の epstopdf による EPS の自動変換は、変換後の PDF を原
 
 LuaLaTeX のフォントキャッシュは、イメージごとの Docker ボリューム（`wravtex-texmf-` で始まる名前）に保存され、次回以降の組版で再利用される。コンテナ内の `HOME`、`TEXMFHOME`、`TEXMFCONFIG` はコンテナ内の一時領域を指し、ホストの TeX の設定は読み込まれない。Linux では、コンテナ内のプロセスを実行ユーザーの UID と GID で実行し、生成物の所有者を実行ユーザーにする。
 
-## 開発
+## 開発への参加
 
-次のコマンドを実行すると、開発環境が構築され、フックが有効化される。
+wravtex 自体を開発する場合は、リポジトリをクローンして次のコマンドを実行する。開発環境が構築され、フックが有効化される。
 
 ```bash
 bash scripts/setup.sh
