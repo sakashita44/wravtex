@@ -21,7 +21,7 @@ jobs:
 
             - name: Setup uv
               # v8 以降はメジャー版のタグがないため、リリースの版を指定する
-              uses: astral-sh/setup-uv@v10.3.0
+              uses: astral-sh/setup-uv@v10.3.3
               with:
                   enable-cache: true
 
