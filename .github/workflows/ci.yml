@@ -36,3 +36,28 @@ jobs:
                   if [ -d tests ]; then
                     uv run pytest
                   fi
+
+    # TeX Live のコンテナで組版する試験。出力ファイルの所有者の確認を含むため Linux で実行する
+    integration:
+        runs-on: ubuntu-latest
+        env:
+            # TeX Live 2025
+            WRAVTEX_TEST_IMAGE: texlive/texlive@sha256:e51e9458a2c18970d6661c3a858c4b069de45a35ff40ecc5f8a0dfb6e53aaff4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+
+            - name: Setup uv
+              # v8 以降はメジャー版のタグがないため、リリースの版を指定する
+              uses: astral-sh/setup-uv@v10.3.0
+              with:
+                  enable-cache: true
+
+            - name: Install dependencies
+              run: uv sync --dev
+
+            - name: Pull TeX Live image
+              run: docker pull "$WRAVTEX_TEST_IMAGE"
+
+            - name: Run integration tests
+              run: uv run pytest -rs tests/test_build.py

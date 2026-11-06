@@ -68,11 +68,11 @@ repos:
             pass_filenames: false
             stages: [pre-push]
 
-          # テストを書いたら有効化する
-          # - id: pytest
-          #   name: pytest
-          #   entry: uv run pytest
-          #   language: system
-          #   always_run: true
-          #   pass_filenames: false
-          #   stages: [pre-push]
+          # 組版の試験は WRAVTEX_TEST_IMAGE を指定した場合だけ実行される
+          - id: pytest
+            name: pytest
+            entry: uv run pytest
+            language: system
+            always_run: true
+            pass_filenames: false
+            stages: [pre-push]
